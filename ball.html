@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head> 
+	<title> Welcome </title>
+</head>
+	<body>
+		<div class="container">
+			<canvas id="canvas" width="500" height="500">  </canvas>
+			<!--creating canvas. canvas first renders here and then i can use it below-->
+		</div>
+			<h1>
+				<script src="primitive.js"> </script>
+				<script>
+					var canvas=document.getElementById("canvas");
+					var ctx=document.getElementById("canvas").getContext("2d");
+					alert(ctx);
+					//declaration of variables
+					var radius = 100;
+					alert(radius);
+					var dampingCoefficient = 0.95;
+					var g = 9.8;
+					var dt = 0.1;
+					var acceleration = new Vector (0, 10);
+
+
+					function drawBall (ball) {
+					ctx.beginPath();
+					ctx.arc(ball.x, ball.y, ball.r, 0, 2*Math.PI);
+					ctx.fill();
+					ctx.closePath();
+				}
+
+					//making a new ball
+					var ball1 = new Ball (100, 100, 100, 0, radius);
+					alert(ball1.x*5);
+					drawBall(ball1);
+							
+					//animates the thing going on
+					function animate() {
+						ctx.clearRect(0,0,canvas.width, canvas.height);
+						var dv = new Vector (acceleration.x*dt, acceleration.y*dt); //velocity differential
+						var dx = new Vector (ball1.vx*dt, ball1.vy*dt);  //position differential
+						ball1.vx+=dv.x;
+						ball1.vy+=dv.y;
+						ball1.x+=dx.x;
+						ball1.y+=dx.y;//updates ball's position and velocity components
+						handleCollision(ball1);
+						drawBall(ball1);
+					}
+					setInterval(animate,10);
+
+					//checks to see if it collides with bottom or top
+					//function doesCollide()
+
+					function handleCollision (ball) { //attempts to detect and fix collisions by fixing ball's velocity
+						if (500-ball.x<(ball.r+3)|| ball.x<ball.r-1) {
+							ball.vx*=-1*dampingCoefficient;
+						}
+						if (500-ball.y<(ball.r+2) || ball.y<ball.r-1) {
+							ball.vy*=-1*dampingCoefficient;
+						}
+					}
+
+			</script>
+		</h1>
+	</body>
+</html>
