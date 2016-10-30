@@ -5,13 +5,15 @@
 </head>
 	<body>
 		<div class="container">
-			<canvas id="canvas" width="500" height="500">  </canvas>
+			<canvas id="canvas">  </canvas>
 			<!--creating canvas. canvas first renders here and then i can use it below-->
 		</div>
 			<h1>
 				<script src="primitive.js"> </script>
 				<script>
 					var canvas=document.getElementById("canvas");
+					canvas.width=window.innerWidth;
+					canvas.height=window.innerHeight;
 					var ctx=document.getElementById("canvas").getContext("2d");
 					alert(ctx);
 					//declaration of variables
@@ -53,10 +55,10 @@
 					//function doesCollide()
 
 					function handleCollision (ball) { //attempts to detect and fix collisions by fixing ball's velocity
-						if (500-ball.x<(ball.r+3)|| ball.x<ball.r-1) {
+						if (window.innerWidth-ball.x<(ball.r+10)|| ball.x<ball.r-10) {
 							ball.vx*=-1*dampingCoefficient;
 						}
-						if (500-ball.y<(ball.r+2) || ball.y<ball.r-1) {
+						if (window.innerHeight-ball.y<(ball.r+10) || ball.y<ball.r-10) {
 							ball.vy*=-1*dampingCoefficient;
 						}
 					}
