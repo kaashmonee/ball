@@ -4,18 +4,19 @@
 	<title> Welcome </title>
 </head>
 	<body>
-		<div class="container">
-			<canvas id="canvas">  </canvas>
-			<!--creating canvas. canvas first renders here and then i can use it below-->
-		</div>
 			<h1>
 				<script src="primitive.js"> </script>
 				<script>
-					var canvas=document.getElementById("canvas");
+					var canvasCounter=1;
+					//USE TO CREATE A CANVAS
+
+					/*var canvas=document.getElementById("canvas");
 					canvas.width=window.innerWidth;
 					canvas.height=window.innerHeight;
 					var ctx=document.getElementById("canvas").getContext("2d");
 					alert(ctx);
+					*/
+
 					//declaration of variables
 					var radius = 100;
 					alert(radius);
@@ -25,31 +26,42 @@
 					var acceleration = new Vector (0, 10);
 
 
-					function drawBall (ball) {
+					function drawBall (ball, canvas) { //draws the ball
+					var ctx = canvas.getContext("2d");
 					ctx.beginPath();
 					ctx.arc(ball.x, ball.y, ball.r, 0, 2*Math.PI);
 					ctx.fill();
 					ctx.closePath();
 				}
 
-					//making a new ball
-					var ball1 = new Ball (100, 100, 100, 0, radius);
-					alert(ball1.x*5);
-					drawBall(ball1);
+					//makes a new ball instance and animates the ball
+					//function to create a new ball
+					//create ball will create a random ball in a random location with a random velocity
+					function createBall () {
+						var canvas = createCanvas();
+						var ball1 = new Ball (Math.random()*canvas.width, Math.random()*canvas.height, 100, 0, radius);
+						alert(ball1.x*5);
+						alert(canvas);
+						drawBall(ball1, canvas);
 							
 					//animates the thing going on
-					function animate() {
-						ctx.clearRect(0,0,canvas.width, canvas.height);
-						var dv = new Vector (acceleration.x*dt, acceleration.y*dt); //velocity differential
-						var dx = new Vector (ball1.vx*dt, ball1.vy*dt);  //position differential
-						ball1.vx+=dv.x;
-						ball1.vy+=dv.y;
-						ball1.x+=dx.x;
-						ball1.y+=dx.y;//updates ball's position and velocity components
-						handleCollision(ball1);
-						drawBall(ball1);
+						function animate(canvas) {
+							var ctx = canvas.getContext("2d");
+							ctx.clearRect(0,0,canvas.width, canvas.height);
+							var dv = new Vector (acceleration.x*dt, acceleration.y*dt); //velocity differential
+							var dx = new Vector (ball1.vx*dt, ball1.vy*dt);  //position differential
+							ball1.vx+=dv.x;
+							ball1.vy+=dv.y;
+							ball1.x+=dx.x;
+							ball1.y+=dx.y;//updates ball's position and velocity components
+							handleCollision(ball1);
+							drawBall(ball1, canvas);
 					}
-					setInterval(animate,10);
+					setInterval(animate(canvas),10);
+				}
+					createBall();
+					//createBall();
+					//createBall();
 
 					//checks to see if it collides with bottom or top
 					//function doesCollide()
@@ -62,7 +74,10 @@
 							ball.vy*=-1*dampingCoefficient;
 						}
 					}
+					//handling collissions with two balls 
+					function handleCollisionMultipleBalls (ball1, ball2){
 
+					}
 			</script>
 		</h1>
 	</body>
