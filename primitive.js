@@ -13,11 +13,13 @@ function Ball (posx, posy, velx, vely, radius) {
 
 function createCanvas () { //creates and returns a new canvas element
 	var canvas = document.createElement('canvas');
-	canvas.id = "canvas"+canvasCounter;
+	//canvas.id = "canvas"+canvasCounter;
 	canvas.width=window.innerWidth;
 	canvas.height=window.innerHeight;
 	canvas.style.zIndex=canvasCounter;//creates canvas hierarchy, on what zplane each canvas is on
 	canvasCounter++;
+	//main.style.left = "2px";
+	//main.style.right = "2px";
 	document.body.appendChild(canvas); //appends the canvas on to the HTML file
 	return canvas;
 }

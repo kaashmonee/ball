@@ -45,11 +45,11 @@
 						drawBall(ball1, canvas);
 							
 					//animates the thing going on
-						function animate(canvas) {
+						function animate() {
 							var ctx = canvas.getContext("2d");
 							ctx.clearRect(0,0,canvas.width, canvas.height);
-							var dv = new Vector (acceleration.x*dt, acceleration.y*dt); //velocity differential
-							var dx = new Vector (ball1.vx*dt, ball1.vy*dt);  //position differential
+							var dv = new Vector (acceleration.x*dt, acceleration.y*dt); //velocity differential vector
+							var dx = new Vector (ball1.vx*dt, ball1.vy*dt);  //position differential vector
 							ball1.vx+=dv.x;
 							ball1.vy+=dv.y;
 							ball1.x+=dx.x;
@@ -57,8 +57,11 @@
 							handleCollision(ball1);
 							drawBall(ball1, canvas);
 					}
-					setInterval(animate(canvas),10);
+					
+					setInterval(animate,10);
+
 				}
+					createBall();
 					createBall();
 					//createBall();
 					//createBall();
