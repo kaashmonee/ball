@@ -5,9 +5,10 @@
 </head>
 	<body>
 			<h1>
+				
 				<script src="primitive.js"> </script>
 				<script>
-					var canvasCounter=1;
+					//var canvasCounter=1;
 					//USE TO CREATE A CANVAS
 
 					/*var canvas=document.getElementById("canvas");
@@ -54,7 +55,7 @@
 							ball1.vy+=dv.y;
 							ball1.x+=dx.x;
 							ball1.y+=dx.y;//updates ball's position and velocity components
-							handleCollision(ball1);
+							handleCollision(ball1, canvas);
 							drawBall(ball1, canvas);
 					}
 					
@@ -69,11 +70,12 @@
 					//checks to see if it collides with bottom or top
 					//function doesCollide()
 
-					function handleCollision (ball) { //attempts to detect and fix collisions by fixing ball's velocity
-						if (window.innerWidth-ball.x<(ball.r+10)|| ball.x<ball.r-10) {
+					function handleCollision (ball, canvas) { //attempts to detect and fix collisions by fixing ball's velocity
+					//takes canvas argument so it knows which canvas boundaries to adhere to
+						if (canvas.width-ball.x<(ball.r+10)|| ball.x<ball.r-10) {
 							ball.vx*=-1*dampingCoefficient;
 						}
-						if (window.innerHeight-ball.y<(ball.r+10) || ball.y<ball.r-10) {
+						if (canvas.height-ball.y<(ball.r+10) || ball.y<ball.r-10) {
 							ball.vy*=-1*dampingCoefficient;
 						}
 					}
