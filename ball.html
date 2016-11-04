@@ -21,11 +21,12 @@
 					//declaration of variables
 					var radius = 100;
 					alert(radius);
-					var dampingCoefficient = 0.95;
+					var dampingCoefficient = 0.97;
 					var g = 9.8;
 					var dt = 0.1;
 					var acceleration = new Vector (0, 10);
-
+					var ballArray = new Array();
+					window.onclick = createBall;
 
 					function drawBall (ball, canvas) { //draws the ball
 					var ctx = canvas.getContext("2d");
@@ -40,7 +41,7 @@
 					//create ball will create a random ball in a random location with a random velocity
 					function createBall () {
 						var canvas = createCanvas();
-						var ball1 = new Ball (Math.random()*canvas.width, Math.random()*canvas.height, 100, 0, radius);
+						var ball1 = new Ball (Math.random()*(canvas.width-radius), Math.random()*(canvas.height-radius), 100, 0, radius);
 						alert(ball1.x*5);
 						alert(canvas);
 						drawBall(ball1, canvas);
@@ -58,11 +59,10 @@
 							handleCollision(ball1, canvas);
 							drawBall(ball1, canvas);
 					}
-					
-					setInterval(animate,10);
+					ballArray.push(ball1); //adds the created ball to the array
 
+					setInterval(animate,10);
 				}
-					createBall();
 					createBall();
 					//createBall();
 					//createBall();
@@ -70,19 +70,8 @@
 					//checks to see if it collides with bottom or top
 					//function doesCollide()
 
-					function handleCollision (ball, canvas) { //attempts to detect and fix collisions by fixing ball's velocity
-					//takes canvas argument so it knows which canvas boundaries to adhere to
-						if (canvas.width-ball.x<(ball.r+10)|| ball.x<ball.r-10) {
-							ball.vx*=-1*dampingCoefficient;
-						}
-						if (canvas.height-ball.y<(ball.r+10) || ball.y<ball.r-10) {
-							ball.vy*=-1*dampingCoefficient;
-						}
-					}
-					//handling collissions with two balls 
-					function handleCollisionMultipleBalls (ball1, ball2){
-
-					}
+					
+					
 			</script>
 		</h1>
 	</body>
