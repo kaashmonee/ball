@@ -1,4 +1,4 @@
-function handleCollision (ball, canvas) { //attempts to detect and fix collisions by fixing ball's velocity
+	function handleCollision (ball, canvas) { //attempts to detect and fix collisions by fixing ball's velocity
 	//takes canvas argument so it knows which canvas boundaries to adhere to
 	if (canvas.width-ball.x<(ball.r+10)|| ball.x<ball.r-10) {
 		ball.vx*=-1*dampingCoefficient;
