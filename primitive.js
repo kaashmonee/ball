@@ -9,6 +9,7 @@ function Ball (posx, posy, velx, vely, radius) {
 	this.vx=velx;
 	this.vy=vely;
 	this.r=radius;
+	this.mass=radius/50;
 }
 var canvasCounter=1;
 //initializes canvas variables to be used in externa files
