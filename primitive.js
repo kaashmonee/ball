@@ -1,6 +1,9 @@
 function Vector (xval,yval) {
 	this.x=xval;
 	this.y=yval;
+	this.add = function (vector) {return new Vector (this.x+vector.x, this.y+vector.y)}; //function to add two vectors
+	this.subtract = function (vector) {return new Vector (this.x-vector.x, this.y-vector.y)}; //function to subtract two vectors
+	this.mag = function () {return Math.sqrt(Math.pow(this.x, 2)+Math.pow(this.y,2))}; //returns the magnitude of the vector
 }
 
 function Ball (posx, posy, velx, vely, radius) {

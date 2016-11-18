@@ -26,7 +26,15 @@ function isCollide (ballA, ballB) {
 function doCollision (ballA, ballB) {
 	//does the collission between ball A and ball B
 	var theta = atan(calcAbsDistance(ballB.y, ballA.y)/calcAbsDistance(ballB.x, ballB.y));
-
+	var velBFrame = new Vector (ballA.vx - ballB.vx, ballA.vy - ballB.vy); //creates a vew vector with x and y components that are ball A's velocity in B's reference frame
+	var vectorAtoB = new Vector (ballB.x - ballA.x, ballB.y - ballA.y); //creates a vector that starts at A and points to B
+	var cosTheta = dotP (vectorAtoB, velBFrame); //defines the nubmer value of the cosine of angle subtended by the two vectors
+	var theta  = cosInv(cosTheta); //the angle that subtends the two vectors
+	var magV = velBFrame.mag(); //magnitude of the velocity vector in ball B's reference frame
+	var vx = magV*Math.cos(theta);
+	var vy = magV*Math.sin(theta);
+	var vx1After = ((ballA.mass-ballB.mass)/(ballA.mass+ballB.mass))*vx;
+	var vy1After = 
 	}
 
 function calcDistance (ballA, ballB) {
@@ -39,4 +47,13 @@ function calcDistance (ballA, ballB) {
 
 function calcAbsDistance (pointA, pointB) {//calculates the absolute value of the distance between two points
 	return Math.abs(pointB - pointA);
+}
+
+function dotP (vector1, vector2) {
+	return (vector1.x*vector2.x)+(vector1.y*vector2.y); //finds the dot product of two vectors
+}
+
+function cosInv (theta) {
+	if (theta > 1) {return null;}
+	else return Math.acos(theta);
 }

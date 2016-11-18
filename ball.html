@@ -9,6 +9,7 @@
 				<script src="mechanics.js"> </script>
 				<script>
 					//declaration of variables
+					//alert('something is working');
 					var radius = 100;
 					alert(radius);
 					var dampingCoefficient = 0.97;
@@ -30,6 +31,7 @@
 					//function to create a new ball
 					//create ball will create a random ball in a random location with a random velocity
 					function createBall () {
+						//alert('something is owrking');
 						var canvas = createCanvas();
 						var ball1 = new Ball (Math.random()*(canvas.width-radius), Math.random()*(canvas.height-radius), 100, 0, radius);
 						//alert(ball1.x*5);
@@ -52,6 +54,13 @@
 					ballArray.push(ball1); //adds the created ball to the array
 					
 					//alert(ballArray); //for testing during development to see whether or not array is holding the balls
+					
+					var v1 = new Vector (2, 4);
+					/*var v2 = new Vector (4,5);
+					var sub = (v2.subtract(v1)); //test to see if the add/subtract methods work
+					alert(""+sub.x+" "+sub.y); WORKS
+					*/
+					//alert(v1.mag()+""); WORKS
 					
 					setInterval(animate,10);
 				}
