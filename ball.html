@@ -1,15 +1,16 @@
 <!DOCTYPE HTML>
 <html>
-<head> 
+<head>
 	<title> Welcome </title>
 </head>
 	<body>
-			<h1>		
+			<h1>
 				<script src="primitive.js"> </script>
 				<script src="mechanics.js"> </script>
 				<script>
 					//declaration of variables
 					//alert('something is working');
+					alert('something is working');
 					var radius = 100;
 					alert(radius);
 					var dampingCoefficient = 0.97;
@@ -30,43 +31,53 @@
 					//makes a new ball instance and animates the ball
 					//function to create a new ball
 					//create ball will create a random ball in a random location with a random velocity
+					var canvas = createCanvas();
+					var ctx = canvas.getContext("2d");
 					function createBall () {
 						//alert('something is owrking');
-						var canvas = createCanvas();
+
 						var ball1 = new Ball (Math.random()*(canvas.width-radius), Math.random()*(canvas.height-radius), 100, 0, radius);
 						//alert(ball1.x*5);
 						//alert(canvas);
-						drawBall(ball1, canvas);
-							
+
+						ballArray.push(ball1); //adds the created ball to the array
+
+
 					//animates the thing going on
 						function animate() {
-							var ctx = canvas.getContext("2d");
+
 							ctx.clearRect(0,0,canvas.width, canvas.height);
 							var dv = new Vector (acceleration.x*dt, acceleration.y*dt); //velocity differential vector
-							var dx = new Vector (ball1.vx*dt, ball1.vy*dt);  //position differential vector
-							ball1.vx+=dv.x;
-							ball1.vy+=dv.y;
-							ball1.x+=dx.x;
-							ball1.y+=dx.y;//updates ball's position and velocity components
-							handleCollision(ball1, canvas);
-							drawBall(ball1, canvas);
+
+							for (var ind=0; ind < ballArray.length; ind++) {
+								var dx = new Vector (ballArray[ind].vx*dt, ballArray[ind].vy*dt);  //position differential vector
+								ballArray[ind].vx+=dv.x;
+								ballArray[ind].vy+=dv.y;
+								ballArray[ind].x+=dx.x;
+								ballArray[ind].y+=dx.y;//updates ball's position and velocity components
+								handleCollision(ballArray[ind], canvas);
+								//handleCollisionMultipleBalls();
+								drawBall(ballArray[ind], canvas);
+						}
+
+
 					}
-					ballArray.push(ball1); //adds the created ball to the array
-					
+						setInterval(animate,10);
+
 					//alert(ballArray); //for testing during development to see whether or not array is holding the balls
-					
+
 					var v1 = new Vector (2, 4);
 					/*var v2 = new Vector (4,5);
 					var sub = (v2.subtract(v1)); //test to see if the add/subtract methods work
 					alert(""+sub.x+" "+sub.y); WORKS
 					*/
 					//alert(v1.mag()+""); WORKS
-					
-					setInterval(animate,10);
+
+
 				}
 
 			</script>
-			
+
 		</h1>
 	</body>
 </html>
