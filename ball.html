@@ -1,10 +1,12 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
 	<title> Welcome </title>
 </head>
-	<body>
-			<h1>
+
+<body>
+	<h1>
 				<script src="primitive.js"> </script>
 				<script src="mechanics.js"> </script>
 				<script>
@@ -33,17 +35,15 @@
 					//create ball will create a random ball in a random location with a random velocity
 					var canvas = createCanvas();
 					var ctx = canvas.getContext("2d");
+
 					function createBall () {
-						//alert('something is owrking');
 
+						//creates ball
 						var ball1 = new Ball (Math.random()*(canvas.width-radius), Math.random()*(canvas.height-radius), 100, 0, radius);
-						//alert(ball1.x*5);
-						//alert(canvas);
+						//adds the created ball to the array
+						ballArray.push(ball1);
 
-						ballArray.push(ball1); //adds the created ball to the array
-
-
-					//animates the thing going on
+				}
 						function animate() {
 
 							ctx.clearRect(0,0,canvas.width, canvas.height);
@@ -59,8 +59,7 @@
 								//handleCollisionMultipleBalls();
 								drawBall(ballArray[ind], canvas);
 						}
-
-
+						handleCollisionMultipleBalls();
 					}
 						setInterval(animate,10);
 
@@ -74,10 +73,11 @@
 					//alert(v1.mag()+""); WORKS
 
 
-				}
+
 
 			</script>
 
 		</h1>
-	</body>
+</body>
+
 </html>
