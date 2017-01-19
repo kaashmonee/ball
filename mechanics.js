@@ -28,26 +28,11 @@ function isCollide(ballA, ballB) {
 }
 
 function doCollision(ballA, ballB) {
-    var parallelVector = twoBallVector(ballA, ballB); //defined vector between two balls in new coordinate frame
-    var perpVector = perpVector(parallelVector); //defined perpendicular vector in new coordinate frame
-    var avectorx = aProjectOntoB(new Vector(ballA.vx, ballA.vy), parallelVector);
-    var avectory = aProjectOntoB(new Vector(ballA.vx, ballA.vy), perpVector);
-    var bvectorx = aProjectOntoB(new Vector(ballB.vx, ballB.vy), parallelVector);
-    var bvectory = aProjectOntoB(new Vector(ballB.vx, ballB.vy), perpVector);
-    var aPrimeVectorX = elasticCollissionV1(avectorx, bvectorx, ballA.mass, ballB.mass);
-    var bPrimeVectorX = elasticCollissionV2(avectorx, bvectorx, ballA.mass, ballB.mass);
-    var aPrimeVectorY = elasticCollissionV1(avectory, bvectory, ballA.mass, ballB.mass);
-    var bPrimeVectorY = elasticCollissionV2(avectory, bvectory, ballA.mass, ballB.mass);
-    //vector components after collission
-    var axPrimeVectorX = aProjectOntoB(aPrimeVectorX, new Vector(1, 0));
-    var ayPrimeVectory = aProjectOntoB(aPrimeVectorY, new Vector(0, 1));
-    var bxPrimeVectorX = aProjectOntoB(bPrimeVectorX, new Vector(1, 0));
-    var byPrimeVectorY = aProjectOntoB(bPrimeVectory, new Vector(0, 1));
-    ballA.vx = axPrimeVectorX;
-    ballA.vy = ayPrimeVectorY;
-    ballB.vx = bxPrimeVectorX;
-    ballB.vy = byPrimeVectorY;
-    //both velocity vectors of each ball in new coordinate frames
+    var tangent = new Vector(ballB.x - ballA.x, ballB.y - ballA.y);
+    var utangent = tangent.divide(tangent.mag());
+    var unormal = new Vector(-1 * utangent.y, utangent.x);
+    alert("x: " + utangent.x + " y: " + utangent.y);
+    alert("unormal: " + unormal.x + " " + unormal.y);
 }
 
 function dotP(vector1, vector2) {
@@ -68,8 +53,8 @@ function perpVector(vector) {
     return new Vector(-vector.y, vector.x);
 }
 
-function vectorMag(vector) {
-    return Math.sqrt(Math.pow(vector.x, 2) + Math.pow(vector.y, 2));
+function unitize(vector) { //returns a unit vector in the same direction
+    return new Vector(vector.x / vector.mag(), vector.y / vector.mag());
 }
 
 function elasticCollissionV1(v1, v2, m1, m2) {

@@ -11,6 +11,10 @@ function Vector(xval, yval) {
     this.mag = function() {
         return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2))
     }; //returns the magnitude of the vector
+
+    this.divide = function(d) {
+        return new Vector(this.x / d, this.y / d)
+    };
 }
 
 function Ball(posx, posy, velx, vely, radius) {
