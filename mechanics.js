@@ -24,7 +24,7 @@ function handleCollisionMultipleBalls() {
 
 function isCollide(ballA, ballB) {
     //determine whether or not ball A and ball B are colliding
-    return calcDistance(ballA, ballB) <= (ballA.r + ballB.r); //just checks one ball because there is no need to check multiple balls for collissions
+    return distance(ballA, ballB) <= (ballA.r + ballB.r); //just checks one ball because there is no need to check multiple balls for collissions
 }
 
 function doCollision(ballA, ballB) {
@@ -32,7 +32,7 @@ function doCollision(ballA, ballB) {
     var utangent = tangent.divide(tangent.mag());
     var unormal = new Vector(-1 * utangent.y, utangent.x);
     alert("x: " + utangent.x + " y: " + utangent.y);
-    alert("unormal: " + unormal.x + " " + unormal.y);
+    alert("Mag: " + unormal.mag() + "unormal: " + unormal.x + " " + unormal.y); //testing to see whether the vectors and the magnitudes are working
 }
 
 function dotP(vector1, vector2) {
@@ -67,4 +67,8 @@ function elasticCollissionV2(v1, v2, m1, m2) {
 
 function aProjectOntoB(vectorA, vectorB) {
     return dotP(vectorA, vectorB) / vectorMag(vectorB);
+}
+
+function distance(ballA, ballB) {
+    return Math.sqrt(Math.pow(ballA.x - ballB.x, 2) + Math.pow(ballA.y - ballB.y, 2));
 }

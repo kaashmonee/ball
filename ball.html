@@ -5,29 +5,36 @@
 	<title> Welcome </title>
 </head>
 
+
 <body>
 	<h1>
 				<script src="primitive.js"> </script>
 				<script src="mechanics.js"> </script>
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 				<script>
+
 					//declaration of variables
-					//alert('something is working');
 					alert('something is working');
 					var radius = 100;
-					alert(radius);
+					//alert(radius);
 					var dampingCoefficient = 0.97;
 					var g = 9.8;
 					var dt = 0.1;
 					var acceleration = new Vector (0, 10);
 					var ballArray = new Array();
-					window.onclick = createBall;
 
+				</script>
+
+				<script>
+					//running variable declaration
+					alert(radius);
+					window.onclick = createBall;
 					function drawBall (ball, canvas) { //draws the ball
-					var ctx = canvas.getContext("2d");
-					ctx.beginPath();
-					ctx.arc(ball.x, ball.y, ball.r, 0, 2*Math.PI);
-					ctx.fill();
-					ctx.closePath();
+						var ctx = canvas.getContext("2d");
+						ctx.beginPath();
+						ctx.arc(ball.x, ball.y, ball.r, 0, 2*Math.PI);
+						ctx.fill();
+						ctx.closePath();
 				}
 
 					//makes a new ball instance and animates the ball
@@ -56,11 +63,17 @@
 								ballArray[ind].x+=dx.x;
 								ballArray[ind].y+=dx.y;//updates ball's position and velocity components
 								handleCollision(ballArray[ind], canvas);
+
 								//handleCollisionMultipleBalls();
 								drawBall(ballArray[ind], canvas);
-						}
+								if (ballArray[ind+1]) {
+									if (isCollide(ballArray[ind], ballArray[ind+1])) {
+											alert("collission function workign");
+									}
+								}
+							}
 						//handleCollisionMultipleBalls();
-						doCollision(ballArray[0], ballArray[1]);
+						//doCollision(ballArray[0], ballArray[1]);
 					}
 						setInterval(animate,10);
 
