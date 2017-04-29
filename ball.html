@@ -28,7 +28,8 @@
 				<script>
 					//running variable declaration
 					alert(radius);
-					window.onclick = createBall;
+					//window.onclick = createBall;
+
 					function drawBall (ball, canvas) { //draws the ball
 						var ctx = canvas.getContext("2d");
 						ctx.beginPath();
@@ -43,16 +44,11 @@
 					var canvas = createCanvas();
 					var ctx = canvas.getContext("2d");
 
-					function createBall () {
+					$("#canvas").click(function (e) {
+						ballArray.push(new Ball (e.offsetX, e.offsetY, 100, 0, radius));
+					});
 
-						//creates ball
-						var ball1 = new Ball (Math.random()*(canvas.width-radius), Math.random()*(canvas.height-radius), 100, 0, radius);
-						//adds the created ball to the array
-						ballArray.push(ball1);
-
-				}
 						function animate() {
-
 							ctx.clearRect(0,0,canvas.width, canvas.height);
 							var dv = new Vector (acceleration.x*dt, acceleration.y*dt); //velocity differential vector
 

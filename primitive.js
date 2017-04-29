@@ -32,6 +32,7 @@ var canvasHeight = window.innerHeight;
 
 function createCanvas() { //creates and returns a new canvas element
     var canvas = document.createElement('canvas');
+    canvas.id = "canvas";
     //canvas.id = "canvas"+canvasCounter;
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
