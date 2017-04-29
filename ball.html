@@ -66,16 +66,18 @@
 
 								//handleCollisionMultipleBalls();
 								drawBall(ballArray[ind], canvas);
-								if (ballArray[ind+1]) {
-									if (isCollide(ballArray[ind], ballArray[ind+1])) {
-											alert("collission function workign");
-									}
+								for (var a = 0; a < ballArray.length-1; a++) {
+									for (var b = a + 1; b < ballArray.length; b++) {
+										if (isCollide(ballArray[a], ballArray[b])) {
+												alert("collission function workign");
+										}
 								}
 							}
+						}
 						//handleCollisionMultipleBalls();
 						//doCollision(ballArray[0], ballArray[1]);
 					}
-						setInterval(animate,10);
+						setInterval(animate,100);
 
 					//alert(ballArray); //for testing during development to see whether or not array is holding the balls
 
