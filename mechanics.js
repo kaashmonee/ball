@@ -1,4 +1,6 @@
 //alert('something is working2');
+var Victor = require("victor");
+
 function handleCollision(ball, canvas) { //attempts to detect and fix collisions by fixing ball's velocity
     //takes canvas argument so it knows which canvas boundaries to adhere to
     if (canvas.width - ball.x < (ball.r + 10) || ball.x < ball.r - 10) {
@@ -28,11 +30,10 @@ function isCollide(ballA, ballB) {
 }
 
 function doCollision(ballA, ballB) {
-    var tangent = new Vector(ballB.x - ballA.x, ballB.y - ballA.y);
-    var utangent = tangent.divide(tangent.mag());
-    var unormal = new Vector(-1 * utangent.y, utangent.x);
-    alert("x: " + utangent.x + " y: " + utangent.y);
-    alert("Mag: " + unormal.mag() + "unormal: " + unormal.x + " " + unormal.y); //testing to see whether the vectors and the magnitudes are working
+    var unitTangent;
+    var n = new Vector(ballA.x - ballB.x, ballA.y - ballB.y);
+    unitTangent = unitize(n);
+    //testing to see whether the vectors and the magnitudes are working
 }
 
 function dotP(vector1, vector2) {

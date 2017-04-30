@@ -20,12 +20,13 @@
 					var dampingCoefficient = 0.97;
 					var g = 9.8;
 					var dt = 0.1;
-					var acceleration = new Vector (0, 10);
+					var acceleration = new Victor (0, 10);
 					var ballArray = new Array();
 
 				</script>
 
 				<script>
+					var Victor = require("victor");
 					//running variable declaration
 					alert(radius);
 					//window.onclick = createBall;
@@ -50,10 +51,10 @@
 
 						function animate() {
 							ctx.clearRect(0,0,canvas.width, canvas.height);
-							var dv = new Vector (acceleration.x*dt, acceleration.y*dt); //velocity differential vector
+							var dv = new Victor (acceleration.x*dt, acceleration.y*dt); //velocity differential vector
 
 							for (var ind=0; ind < ballArray.length; ind++) {
-								var dx = new Vector (ballArray[ind].vx*dt, ballArray[ind].vy*dt);  //position differential vector
+								var dx = new Victor (ballArray[ind].vx*dt, ballArray[ind].vy*dt);  //position differential vector
 								ballArray[ind].vx+=dv.x;
 								ballArray[ind].vy+=dv.y;
 								ballArray[ind].x+=dx.x;
@@ -65,8 +66,8 @@
 								for (var a = 0; a < ballArray.length-1; a++) {
 									for (var b = a + 1; b < ballArray.length; b++) {
 										if (isCollide(ballArray[a], ballArray[b])) {
-												alert("collission function workign");
-										}
+											//handle collission code here
+									}
 								}
 							}
 						}
@@ -77,7 +78,7 @@
 
 					//alert(ballArray); //for testing during development to see whether or not array is holding the balls
 
-					var v1 = new Vector (2, 4);
+					var v1 = new Victor (2, 4);
 					/*var v2 = new Vector (4,5);
 					var sub = (v2.subtract(v1)); //test to see if the add/subtract methods work
 					alert(""+sub.x+" "+sub.y); WORKS
