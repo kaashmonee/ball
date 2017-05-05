@@ -14,22 +14,13 @@
       <script src="/home/skanda/bower_components/victor/build/victor.js"></script>
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 			<script>
-			//var Victor = require("victor");
-			//declaration of variables
-			alert('something is working');
+
 			var radius = 100;
-			//alert(radius);
-			var dampingCoefficient = 0.97;
+			var dampingCoefficient = 0.9;
 			var g = 9.8;
 			var dt = 0.1;
-      alert("it's working righ now.");
-			//var acceleration = new Victor(0, 10);
-      var acceleration = new Victor(0, g);
-      alert("it's still working. "+acceleration.x+" "+acceleration.y);
-			alert(acceleration.x+" "+acceleration.y);
+      var acceleration = new Victor(0, 9.8);
 			var ballArray = new Array();
-			alert(ballArray.length);
-
 
 			//running variable declaration
 			//alert(radius);
@@ -79,21 +70,9 @@
 				//handleCollisionMultipleBalls();
 				//doCollision(ballArray[0], ballArray[1]);
 			}
-				setInterval(animate,100);
+				setInterval(animate,10);
 
-			//alert(ballArray); //for testing during development to see whether or not array is holding the balls
-
-			var v1 = new Victor (2, 4);
-			/*var v2 = new Vector (4,5);
-			var sub = (v2.subtract(v1)); //test to see if the add/subtract methods work
-			alert(""+sub.x+" "+sub.y); WORKS
-			*/
-			//alert(v1.mag()+""); WORKS
-
-
-
-
-			</script>
+		</script>
 
 		</h1>
 </body>

@@ -1,5 +1,5 @@
 //alert('something else is working3');
-function Vector(xval, yval) {
+/*function Vector(xval, yval) {
     this.x = xval;
     this.y = yval;
     this.add = function(vector) {
@@ -15,7 +15,7 @@ function Vector(xval, yval) {
     this.divide = function(d) {
         return new Vector(this.x / d, this.y / d)
     };
-}
+}*/
 
 function Ball(posx, posy, velx, vely, radius) {
     this.x = posx;
