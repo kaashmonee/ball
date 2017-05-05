@@ -8,82 +8,87 @@
 
 <body>
 	<h1>
-				<script src="primitive.js"> </script>
-				<script src="mechanics.js"> </script>
-				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-				<script>
+<!--<script>var Victor = require("victor");</script>-->
+			<script src="primitive.js"> </script>
+			<script src="mechanics.js"> </script>
+      <!--<script src="/home/skanda/node_modules/victor/bundle.js"></script>-->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+			<script>
+			//var Victor = require("victor");
+			//declaration of variables
+			alert('something is working');
+			var radius = 100;
+			//alert(radius);
+			var dampingCoefficient = 0.97;
+			var g = 9.8;
+			var dt = 0.1;
+      alert("it's working righ now.");
+			//var acceleration = new Victor(0, 10);
+      var acceleration = new Victor(0, g);
+      alert("it's still working. "+acceleration.x+" "+acceleration.y);
+			alert(acceleration.x+" "+acceleration.y);
+			var ballArray = new Array();
+			alert(ballArray.length);
 
-					//declaration of variables
-					alert('something is working');
-					var radius = 100;
-					//alert(radius);
-					var dampingCoefficient = 0.97;
-					var g = 9.8;
-					var dt = 0.1;
-					var acceleration = new Victor (0, 10);
-					var ballArray = new Array();
 
-				</script>
+			//running variable declaration
+			//alert(radius);
+			//window.onclick = createBall;
 
-				<script>
-					var Victor = require("victor");
-					//running variable declaration
-					alert(radius);
-					//window.onclick = createBall;
+			function drawBall (ball, canvas) { //draws the ball
+				var ctx = canvas.getContext("2d");
+				ctx.beginPath();
+				ctx.arc(ball.x, ball.y, ball.r, 0, 2*Math.PI);
+				ctx.fill();
+				ctx.closePath();
+			}
 
-					function drawBall (ball, canvas) { //draws the ball
-						var ctx = canvas.getContext("2d");
-						ctx.beginPath();
-						ctx.arc(ball.x, ball.y, ball.r, 0, 2*Math.PI);
-						ctx.fill();
-						ctx.closePath();
-				}
 
-					//makes a new ball instance and animates the ball
-					//function to create a new ball
-					//create ball will create a random ball in a random location with a random velocity
-					var canvas = createCanvas();
-					var ctx = canvas.getContext("2d");
+			//makes a new ball instance and animates the ball
+			//function to create a new ball
+			//create ball will create a random ball in a random location with a random velocity
+			var canvas = createCanvas();
+			var ctx = canvas.getContext("2d");
 
-					$("#canvas").click(function (e) {
-						ballArray.push(new Ball (e.offsetX, e.offsetY, 100, 0, radius));
-					});
+			$("#canvas").click(function (e) {
+				ballArray.push(new Ball (e.offsetX, e.offsetY, 100, 0, radius));
+			});
 
-						function animate() {
-							ctx.clearRect(0,0,canvas.width, canvas.height);
-							var dv = new Victor (acceleration.x*dt, acceleration.y*dt); //velocity differential vector
+				function animate() {
+					ctx.clearRect(0,0,canvas.width, canvas.height);
+					var dv = new Victor (acceleration.x*dt, acceleration.y*dt); //velocity differential vector
 
-							for (var ind=0; ind < ballArray.length; ind++) {
-								var dx = new Victor (ballArray[ind].vx*dt, ballArray[ind].vy*dt);  //position differential vector
-								ballArray[ind].vx+=dv.x;
-								ballArray[ind].vy+=dv.y;
-								ballArray[ind].x+=dx.x;
-								ballArray[ind].y+=dx.y;//updates ball's position and velocity components
-								handleCollision(ballArray[ind], canvas);
+					for (var ind=0; ind < ballArray.length; ind++) {
+						var dx = new Victor (ballArray[ind].vx*dt, ballArray[ind].vy*dt);  //position differential vector
+						ballArray[ind].vx+=dv.x;
+						ballArray[ind].vy+=dv.y;
+						ballArray[ind].x+=dx.x;
+						ballArray[ind].y+=dx.y;//updates ball's position and velocity components
+						handleCollision(ballArray[ind], canvas);
 
-								//handleCollisionMultipleBalls();
-								drawBall(ballArray[ind], canvas);
-								for (var a = 0; a < ballArray.length-1; a++) {
-									for (var b = a + 1; b < ballArray.length; b++) {
-										if (isCollide(ballArray[a], ballArray[b])) {
-											//handle collission code here
-									}
-								}
+						//handleCollisionMultipleBalls();
+						drawBall(ballArray[ind], canvas);
+						for (var a = 0; a < ballArray.length-1; a++) {
+							for (var b = a + 1; b < ballArray.length; b++) {
+								if (isCollide(ballArray[a], ballArray[b])) {
+									//handle collission code here
 							}
 						}
-						//handleCollisionMultipleBalls();
-						//doCollision(ballArray[0], ballArray[1]);
 					}
-						setInterval(animate,100);
+				}
+				//handleCollisionMultipleBalls();
+				//doCollision(ballArray[0], ballArray[1]);
+			}
+				setInterval(animate,100);
 
-					//alert(ballArray); //for testing during development to see whether or not array is holding the balls
+			//alert(ballArray); //for testing during development to see whether or not array is holding the balls
 
-					var v1 = new Victor (2, 4);
-					/*var v2 = new Vector (4,5);
-					var sub = (v2.subtract(v1)); //test to see if the add/subtract methods work
-					alert(""+sub.x+" "+sub.y); WORKS
-					*/
-					//alert(v1.mag()+""); WORKS
+			var v1 = new Victor (2, 4);
+			/*var v2 = new Vector (4,5);
+			var sub = (v2.subtract(v1)); //test to see if the add/subtract methods work
+			alert(""+sub.x+" "+sub.y); WORKS
+			*/
+			//alert(v1.mag()+""); WORKS
 
 
 
